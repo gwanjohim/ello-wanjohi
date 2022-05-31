@@ -8,7 +8,7 @@ import { PageSubstring } from './page-sub-string';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements AfterContentChecked {
+export class AppComponent  {
 
   // @ViewChild('pageContent', { read: true, static: false }) pageContent: ElementRef;
 
@@ -17,7 +17,6 @@ export class AppComponent implements AfterContentChecked {
   error: any;
   title = 'ello-wanjohi';
   constructor(private apollo: Apollo) {
-    // this.pageContent = new ElementRef<any>(undefined)
   }
 
   ngOnInit() {
@@ -43,18 +42,10 @@ export class AppComponent implements AfterContentChecked {
         this.loading = result.loading
         this.error = result.error
         this.book = book
-        // this.prepareBook(book)
       });
   }
 
 
-  ngAfterContentChecked(): void {
-
-
-    // let pageText = this.pageContent.nativeElement.innerText
-
-    // console.error(pageText)
-  }
   preparePage(tokens: Token[]) {
     return tokens.map(token => {
       let positions = token.position
@@ -64,7 +55,7 @@ export class AppComponent implements AfterContentChecked {
       let substringLength = endIndex - startIndex
       let SubstringValue = token.value
 
-      let pagesubString: PageSubstring = { startIndex: startIndex, length: substringLength, subString: SubstringValue }
+      let pagesubString: PageSubstring = { startIndex: startIndex, endIndex: endIndex, length: substringLength, subString: SubstringValue }
       return pagesubString;
       //we care about
 

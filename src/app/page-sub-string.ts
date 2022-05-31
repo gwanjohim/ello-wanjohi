@@ -1,5 +1,6 @@
 export interface PageSubstring {
-    startIndex: Number
+    startIndex: number
+    endIndex: number
     length: number
     subString: string
   }

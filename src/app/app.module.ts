@@ -6,11 +6,13 @@ import { AppComponent } from './app.component';
 import { GraphQLModule } from './graphql.module';
 import { HttpClientModule } from '@angular/common/http';
 import { HighlightDirective } from './directives/highlight/highlight.directive';
+import { BookPageComponent } from './components/book-page/book-page.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HighlightDirective
+    HighlightDirective,
+    BookPageComponent
   ],
   imports: [
     BrowserModule,
