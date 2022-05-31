@@ -17,12 +17,8 @@
     <div>pages: {{book.pages.length}}</div>
     <br>
     <div *ngFor="let page of book.pages">
-      <!-- <div *ngIf="page.content != ''"> -->
-        <p style="font-size: 40px;">{{page.content}}</p>
-        <div *ngFor="let pageToken of page.tokens"></div>
-        <!-- <p style="font-size: 20px;">{{pageToken.value}}</p> -->
-        <br>
-      <!-- </div> -->
+      <!-- <p id="bookPage"></p> -->
+      <p #pageContent style="font-size: 40px;" [appHighlight]="preparePage(page.tokens) ">{{page.content}}</p>
     </div>
   </div>
 </div>

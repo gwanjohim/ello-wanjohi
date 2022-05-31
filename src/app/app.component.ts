@@ -1,18 +1,24 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterContentChecked, AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Apollo, gql } from 'apollo-angular';
-import { Book } from './book-model';
+import { Book, Page, Token } from './book-model';
+import { PageSubstring } from './page-sub-string';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements AfterContentChecked {
+
+  // @ViewChild('pageContent', { read: true, static: false }) pageContent: ElementRef;
+
   book: Book | undefined;
   loading = true;
   error: any;
   title = 'ello-wanjohi';
-  constructor(private apollo: Apollo) { }
+  constructor(private apollo: Apollo) {
+    // this.pageContent = new ElementRef<any>(undefined)
+  }
 
   ngOnInit() {
     this.apollo
@@ -37,44 +43,36 @@ export class AppComponent {
         this.loading = result.loading
         this.error = result.error
         this.book = book
-        this.prepareBook(book)
+        // this.prepareBook(book)
       });
   }
 
-  prepareBook(book: Book) {
-    let pages = book.pages
 
-    pages.forEach(page => {
-      let content = page.content
-      let tokens = page.tokens
-
-      let tokenizedSubstrings = tokens.map(token => {
-        let positions = token.position
-        let startIndex = positions[0]
-        let endIndex = positions[1]
-
-        let substringLength = endIndex - startIndex
-        let SubstringValue = token.value
-
-        let pagesubString: PageSubstring = { startIndex: startIndex, length: substringLength, subString: SubstringValue }
-        return pagesubString;
-        //we care about
-        
-        //startIndex
-        //SubString length
-        //the substringValue
-      })
-      console.error(content)
-      console.error(tokenizedSubstrings)
+  ngAfterContentChecked(): void {
 
 
-    });
+    // let pageText = this.pageContent.nativeElement.innerText
 
+    // console.error(pageText)
+  }
+  preparePage(tokens: Token[]) {
+    return tokens.map(token => {
+      let positions = token.position
+      let startIndex = positions[0]
+      let endIndex = positions[1]
+
+      let substringLength = endIndex - startIndex
+      let SubstringValue = token.value
+
+      let pagesubString: PageSubstring = { startIndex: startIndex, length: substringLength, subString: SubstringValue }
+      return pagesubString;
+      //we care about
+
+      //startIndex
+      //SubString length
+      //the substringValue
+    })
   }
 }
 
-export interface PageSubstring {
-  startIndex: Number
-  length: number
-  subString: string
-}
+
