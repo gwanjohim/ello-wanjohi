@@ -25,3 +25,34 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+
+GraphQL endpoint :  https://fullstack-engineer-test-n4ouilzfna-uc.a.run.app/graphql
+
+Graphql Query: 
+
+{book{
+  author
+  title
+  pages{
+    content
+    pageIndex
+    tokens{
+      position
+      value
+    }
+  }
+}}
+
+
+Coding challenge link 
+
+https://github.com/ElloTechnology/full-stack-test/blob/main/README.md
+
+Job Posting URL:
+
+https://www.linkedin.com/jobs/search/?currentJobId=3067360481&f_I=4&f_JT=F%2CP%2CC%2CI&f_TPR=r2592000&f_WT=2%2C1%2C3&geoId=100710459&keywords=software%20developer&location=Kenya&sortBy=R
+
+
+Think of it this way...
+
