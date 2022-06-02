@@ -17,6 +17,11 @@
     <div>pages: {{book.pages.length}}</div>
     <br>
     <div *ngFor="let page of book.pages">
+      <div style="color: red;">{{page.content}}</div>
+      <!-- <span *ngFor="let token of page.tokens">
+        <span>{{token.position}}</span>
+        <span>{{token.value}}</span>
+      </span> -->
       <app-book-page [PageText]="page.content" [PageTokens]="preparePage(page.tokens)"></app-book-page>
     </div>
   </div>

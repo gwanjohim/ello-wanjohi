@@ -1,9 +1,8 @@
-import { JsonPipe } from '@angular/common';
-import { escapeRegExp } from '@angular/compiler/src/util';
-import { AfterContentChecked, AfterContentInit, AfterViewInit, Component, ElementRef, Input, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { PageSubstring } from 'src/app/page-sub-string';
 import { Inject } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
+
 
 @Component({
   selector: 'app-book-page',
@@ -14,29 +13,33 @@ export class BookPageComponent implements OnInit, AfterViewInit {
 
   @Input() PageText: string;
   @Input() PageTokens: PageSubstring[]
-
+  @ViewChild('pageContent') pageContent: ElementRef
   constructor(@Inject(DOCUMENT) public document: Document) {
   }
   ngAfterViewInit(): void {
 
-    var textInput = this.PageText;
+    let pageinCharArray = Array.from(this.PageText)
 
-    let resultText = this.PageTokens.reduce((previous, token) => {
+    let result = this.PageTokens.map(token => {
+      let startIndex = token.startIndex
+      let endIndex = token.endIndex + 1
+      let charMatches = pageinCharArray.slice(startIndex, endIndex).join('')
+      let span = this.document.createElement('span')
+      span.addEventListener("click", function () {
+        document.getElementById('paragraphPage')!.innerHTML = token.subString
+      });
+      span.textContent =  charMatches
+      return span
+    })
 
-      let word = textInput.substring(token.startIndex, token.endIndex)
-      var replacement = '<span>' + word + '</span>'
-      let current = textInput.substring(token.startIndex, token.endIndex).replace(word, replacement)
-      return previous + current
-    }, '')
-
-    var docu = document.getElementById('pageContent')
-    docu!.outerText = resultText
-
+    result.forEach(x => this.pageContent.nativeElement.appendChild(x))
+    
 
   }
 
-  ngOnInit(): void {
 
+
+  ngOnInit(): void {
   }
 
 }
