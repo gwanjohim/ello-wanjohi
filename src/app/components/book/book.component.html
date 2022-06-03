@@ -1,0 +1,23 @@
+<!-- Toolbar -->
+<div class="toolbar" role="banner">
+    <span style="margin-left: 10px;">Ello Reader</span>
+    <div class="spacer"></div>
+  </div>
+  
+  <div class="content" role="main">
+    <div *ngIf="loading">
+      Loading...
+    </div>
+    <div *ngIf="error">
+      The errror is : {{error}}
+    </div>
+    <div *ngIf="book">
+      <div style="font-weight: bold; font-size: 30px;">{{book.title}}</div>
+      <div>by: {{book.author}}</div>
+      <div>pages: {{book.pages.length}}</div>
+      <br>
+      <div *ngFor="let page of book.pages">
+        <app-book-page [PageText]="page.content" [PageTokens]="page.tokens"></app-book-page>
+      </div>
+    </div>
+  </div>

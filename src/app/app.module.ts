@@ -7,12 +7,16 @@ import { GraphQLModule } from './graphql.module';
 import { HttpClientModule } from '@angular/common/http';
 import { HighlightDirective } from './directives/highlight/highlight.directive';
 import { BookPageComponent } from './components/book-page/book-page.component';
+import { WordDefinitionComponent } from './components/word-definition/word-definition.component';
+import { BookComponent } from './components/book/book.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HighlightDirective,
-    BookPageComponent
+    BookPageComponent,
+    WordDefinitionComponent,
+    BookComponent
   ],
   imports: [
     BrowserModule,
