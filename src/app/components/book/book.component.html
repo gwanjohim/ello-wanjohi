@@ -16,7 +16,21 @@
         <div style="font-weight: bold;">{{book.author}}</div>
         <div>pages: {{book.pages.length}}</div>
         <br>
-        <div>
+
+
+
+        <div *ngFor="let pageItem of currentlyShownPages;">
+
+            <div *ngIf="pageItem">
+
+                <!-- <div>{{pageItem}}</div> -->
+                <app-book-page [BookPage]="pageItem">
+                </app-book-page>
+            </div>
+
+        </div>
+
+        <!-- <div>
             <div>
                 <div style="display: flex;
                 flex-direction: row;
@@ -36,9 +50,12 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
     </div>
 </div>
 
-<button [disabled]="currentPage === book?.pages?.length" class="nextButton circle-link" (click)="goToNextDoublePage()"><i class="material-icons">arrow_forward</i></button>
-<button [disabled]="currentPage === 0" class="backButton circle-link" (click)="goToPreviousDoublePage()" ><i class="material-icons">arrow_back</i></button>
+<div ></div>
+<button class="nextButton circle-link" (click)="goToNextDoublePage()"><i
+        class="material-icons">arrow_forward</i></button>
+<button class="backButton circle-link" (click)="goToPreviousDoublePage()"><i
+        class="material-icons">arrow_back</i></button>
