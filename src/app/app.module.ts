@@ -9,6 +9,7 @@ import { HighlightDirective } from './directives/highlight/highlight.directive';
 import { BookPageComponent } from './components/book-page/book-page.component';
 import { WordDefinitionComponent } from './components/word-definition/word-definition.component';
 import { BookComponent } from './components/book/book.component';
+import { BookDoublePageComponent } from './components/book-double-page/book-double-page.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { BookComponent } from './components/book/book.component';
     HighlightDirective,
     BookPageComponent,
     WordDefinitionComponent,
-    BookComponent
+    BookComponent,
+    BookDoublePageComponent
   ],
   imports: [
     BrowserModule,

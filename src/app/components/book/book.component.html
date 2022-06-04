@@ -2,22 +2,43 @@
 <div class="toolbar" role="banner">
     <span style="margin-left: 10px;">Ello Reader</span>
     <div class="spacer"></div>
-  </div>
-  
-  <div class="content" role="main">
+</div>
+
+<div class="content" role="main">
     <div *ngIf="loading">
-      Loading...
+        Loading...
     </div>
     <div *ngIf="error">
-      The errror is : {{error}}
+        The errror is : {{error}}
     </div>
     <div *ngIf="book">
-      <div style="font-weight: bold; font-size: 30px;">{{book.title}}</div>
-      <div>by: {{book.author}}</div>
-      <div>pages: {{book.pages.length}}</div>
-      <br>
-      <div *ngFor="let page of book.pages">
-        <app-book-page [PageText]="page.content" [PageTokens]="page.tokens"></app-book-page>
-      </div>
+        <div style="font-weight: bold; font-size: 30px;">{{book.title}}</div>
+        <div style="font-weight: bold;">{{book.author}}</div>
+        <div>pages: {{book.pages.length}}</div>
+        <br>
+        <div>
+            <div>
+                <div style="display: flex;
+                flex-direction: row;
+                flex-wrap: nowrap;
+                justify-content: space-around;
+                align-items: stretch;
+                align-content: stretch;
+                width: 100%;
+                " *ngFor="let page of pages; let i = index;">
+                    <div class="half-page">
+                        <app-book-page [BookPage]="pages[0]">
+                        </app-book-page>
+                    </div>
+                    <div class="half-page">
+                        <app-book-page [BookPage]="pages[1]">
+                        </app-book-page>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
+</div>
+
+<button [disabled]="currentPage === book?.pages?.length" class="nextButton circle-link" (click)="goToNextDoublePage()"><i class="material-icons">arrow_forward</i></button>
+<button [disabled]="currentPage === 0" class="backButton circle-link" (click)="goToPreviousDoublePage()" ><i class="material-icons">arrow_back</i></button>

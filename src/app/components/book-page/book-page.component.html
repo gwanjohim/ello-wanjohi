@@ -1,9 +1,17 @@
 <div>
-    <div id="paragraphPage"></div>
-    <p #pageContent style="font-size: 30px;"></p>
+    <div>{{BookPage.pageIndex}}</div>
     <hr>
-</div>
-<!-- 
-<div  style="position: absolute; width: 400px; height: 400px; background-color: aliceblue; font-size: 100%;">
+    <div *ngIf="BookPage.content != ''; else noItems">
+        <p class="page-content" #pageContent></p>
+    </div>
 
-</div> -->
+    <div>
+    <ng-template #noItems >
+        <div>No Content</div>
+    </ng-template>
+</div>
+    <div style="position: relative; margin: auto; top:80hv;text-align: center;">
+        <span>{{PageNumber}}</span>
+    </div>
+
+</div>
