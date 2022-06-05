@@ -1,5 +1,6 @@
 <div class="toolbar" role="banner">
-    <span style="font-family: 'Rubik Wet Paint', cursive; font-size: 40px;margin: auto;text-align: center; ">Ello Reader</span>
+    <span style="font-family: 'Rubik Wet Paint', cursive; font-size: 40px;margin: auto;text-align: center; ">Ello
+        Reader</span>
     <!-- <div class="spacer"></div> -->
 </div>
 
@@ -13,31 +14,33 @@
     <div *ngIf="book">
         <div style="font-weight: bold; font-size: 40px; color: grey;">{{book.title}}</div>
         <div style="font-weight: 100;">by: {{book.author}}</div>
-        <div style="border: 1px solid; width: fit-content; padding:2px; margin-top: 1%;">pages: {{book.pages.length}}</div>
-        <br>
+        <div style="border: 1px solid; width: fit-content; padding:2px; margin-top: 1%;">pages: {{book.pages.length}}
+        </div>
+        <div class="navigation-buttons">
+            <button [disabled]="offset === 0" class="circle-link" (click)="goToPreviousDoublePage()"><i
+                    class="material-icons">arrow_back</i></button>
+            <button [disabled]="offset === book?.pages?.length" class="circle-link" (click)="goToNextDoublePage()"><i
+                    class="material-icons">arrow_forward</i></button>
+
+        </div>
 
         <div style="display: flex;
         flex-direction: row;
         flex-wrap: nowrap;
         justify-content: space-between;
-        align-items: stretch;
+        align-items: flex-start;
         align-content: space-between;
         width: 100%;
         ">
-            <div *ngFor="let pageItem of currentlyShownPages;" style="width: 45%;">
+            <div *ngFor="let pageItem of currentlyShownPages;" style="width: 45%; padding: 10px;">
                 <div *ngIf="pageItem">
                     <app-book-page [BookPage]="pageItem">
                     </app-book-page>
+
                 </div>
 
             </div>
+
         </div>
     </div>
 </div>
-
-<div></div>
-<div></div>
-<button [disabled]="offset === book?.pages?.length" class="nextButton circle-link" (click)="goToNextDoublePage()"><i
-        class="material-icons">arrow_forward</i></button>
-<button [disabled]="offset === 0" class="backButton circle-link" (click)="goToPreviousDoublePage()"><i
-        class="material-icons">arrow_back</i></button>

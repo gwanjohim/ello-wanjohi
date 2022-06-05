@@ -13,14 +13,12 @@ export class BookPageComponent implements AfterViewInit {
 
   @Input() BookPage: Page;
   @ViewChild(`pageContent`) pageContent: ElementRef
-  constructor(@Inject(DOCUMENT) public document: Document) {
+  constructor() {
   }
 
 
   ngAfterViewInit(): void {
-   
     this.processPage()
-
   }
 
   processPage(){

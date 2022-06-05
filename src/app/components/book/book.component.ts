@@ -21,7 +21,7 @@ export class BookComponent implements OnInit, OnDestroy {
   pageCount = 2;
   currentlyShownPages: Page[] = []
 
-  constructor(private apollo: Apollo, private router: Router) {
+  constructor(private apollo: Apollo) {
   }
 
 
@@ -65,7 +65,6 @@ export class BookComponent implements OnInit, OnDestroy {
           this.book = book
           this.initializeView()
         });
-
     }
 
 
@@ -77,7 +76,6 @@ export class BookComponent implements OnInit, OnDestroy {
       localStorage.setItem('filterItems', JSON.stringify(this.currentlyShownPages));
       localStorage.setItem('book', JSON.stringify(this.book));
       localStorage.setItem('offset', `${this.offset}`);
-
     }
 
   }

@@ -8,18 +8,9 @@ import { PageSubstring } from './page-sub-string';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent  {
-
-  title = 'ello-wanjohi';
-  constructor() {
-  }
-
-  ngOnInit() {
-  
-  }
-
-
- 
+export class AppComponent {
+  constructor() { }
+  ngOnInit() { }
 }
 
 

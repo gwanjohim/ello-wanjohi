@@ -1,15 +1,5 @@
-.half-page{
-    height: 100vh;
-    width: 40%;
-}
-
-.nextButton{
-    position: absolute;
-    top: 50%;
-    right: 2%;
-}
-.backButton{
-    position: absolute;
-    top: 50%;
-    left: 2%;
+.navigation-buttons{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
