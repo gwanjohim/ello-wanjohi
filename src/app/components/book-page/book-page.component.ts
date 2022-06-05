@@ -1,14 +1,8 @@
-import { AfterContentChecked, AfterContentInit, AfterViewChecked, AfterViewInit, Component, ElementRef, Input, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
-import { PageSubstring } from 'src/app/page-sub-string';
+import { AfterViewInit, Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { Inject } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
-import { Page, Token } from 'src/app/book-model';
+import { Page } from 'src/app/book-model';
 
-export interface token {
-  character: string
-  index: number
-  word: string
-}
 
 @Component({
   selector: 'app-book-page',
@@ -18,7 +12,6 @@ export interface token {
 export class BookPageComponent implements AfterViewInit {
 
   @Input() BookPage: Page;
-  @Input() PageNumber: number;
   @ViewChild(`pageContent`) pageContent: ElementRef
   constructor(@Inject(DOCUMENT) public document: Document) {
   }
@@ -43,7 +36,7 @@ export class BookPageComponent implements AfterViewInit {
           let actualStringOnDocument = charMatches.length
           let wordLink = this.BookPage.tokens[index].value
 
-          charMatches.unshift(`<a href="/word?name=${wordLink}">`)
+          charMatches.unshift(`<a href="#/home/word?name=${wordLink}">`)
           charMatches.push("</a>")
 
           pageinCharArray.splice(startIndex, (actualStringOnDocument), charMatches.join(''))

@@ -3,12 +3,21 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "type": "pwa-chrome",
-      "request": "attach",
-      "name": "Attach to Chrome",
+      "name": "Launch localhost",
+      "type": "firefox",
+      "request": "launch",
+      "reAttach": true,
       "url": "http://localhost:4200/*",
-      "webRoot": "${workspaceFolder}",
-      "port": 9222
+      "pathMappings": [
+        {
+          "url": "webpack:///src",
+          "path": "${workspaceFolder}/src"
+        },
+        {
+          "url": "webpack:///src",
+          "path": "${workspaceFolder}/src"
+        }
+      ]
     }
   ]
 }
