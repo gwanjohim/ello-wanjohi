@@ -16,6 +16,10 @@
         {
           "url": "webpack:///src",
           "path": "${workspaceFolder}/src"
+        },
+        {
+          "url": "webpack:///src",
+          "path": "${workspaceFolder}/src"
         }
       ]
     }

@@ -23,27 +23,30 @@ export class BookPageComponent implements AfterViewInit {
 
   processPage(){
     if (this.BookPage.content !== '') {
-      let pageinCharArray = Array.from(this.BookPage.content)
+      const pageCharactersArray = Array.from(this.BookPage.content)
+
       let lengthOfTokens = this.BookPage.tokens.length;
+
       for (let index = lengthOfTokens; index >= 0; index--) {
         try {
-          let startIndex = this.BookPage.tokens[index].position[0]
-          let endIndex = this.BookPage.tokens[index].position[1]
+          const startIndex = this.BookPage.tokens[index].position[0]
+          const endIndex = this.BookPage.tokens[index].position[1]
+
           //a new array representing the word
-          let charMatches = pageinCharArray.slice(startIndex, endIndex)
-          let actualStringOnDocument = charMatches.length
-          let wordLink = this.BookPage.tokens[index].value
+          const charMatches = pageCharactersArray.slice(startIndex, endIndex)
+          const actualStringOnDocument = charMatches.length
+          const wordLink = this.BookPage.tokens[index].value
 
           charMatches.unshift(`<a href="#/home/word?name=${wordLink}">`)
           charMatches.push("</a>")
 
-          pageinCharArray.splice(startIndex, (actualStringOnDocument), charMatches.join(''))
+          pageCharactersArray.splice(startIndex, (actualStringOnDocument), charMatches.join(''))
         } catch (error) {
         }
       }
-      pageinCharArray.unshift("<span>")
-      pageinCharArray.push("</span>")
-      this.pageContent.nativeElement.innerHTML = pageinCharArray.join('')
+      pageCharactersArray.unshift("<span>")
+      pageCharactersArray.push("</span>")
+      this.pageContent.nativeElement.innerHTML = pageCharactersArray.join('')
     }
   }
 

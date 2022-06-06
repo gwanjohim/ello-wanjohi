@@ -13,7 +13,7 @@ export class BookComponent implements OnInit, OnDestroy {
 
 
   book: Book | undefined;
-  // loading = true;
+  loading = false;
   error: any;
   title = 'ello';
 
@@ -22,11 +22,6 @@ export class BookComponent implements OnInit, OnDestroy {
   currentlyShownPages: Page[] = []
 
   constructor(private apollo: Apollo) {
-  }
-
-
-  createPageItems(pagesPerView: number) {
-    return new Array<number>(pagesPerView)
   }
 
   ngOnInit() {
@@ -59,16 +54,12 @@ export class BookComponent implements OnInit, OnDestroy {
         `,
         })
         .valueChanges.subscribe((result: any) => {
-          // this.loading = result.loading
+          this.loading = result.loading
           this.error = result.error
-          let book = result?.data?.book
-          this.book = book
+          this.book = result!.data!.book
           this.initializeView()
         });
     }
-
-
-
   }
 
   ngOnDestroy(): void {
@@ -77,7 +68,6 @@ export class BookComponent implements OnInit, OnDestroy {
       localStorage.setItem('book', JSON.stringify(this.book));
       localStorage.setItem('offset', `${this.offset}`);
     }
-
   }
 
   initializeView() {
