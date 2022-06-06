@@ -11,15 +11,18 @@ import { Book, Page } from 'src/app/book-model';
 })
 export class BookComponent implements OnInit, OnDestroy {
 
-
+  /**The book we are getting from ello endpoint */
   book: Book | undefined;
+  /**Lets the user know that the app is in the process of getting data from the graph endpoint */
   loading = false;
   error: any;
   title = 'ello';
 
+  /**This is the current page being displayed. This is the index of the page that is currently being displayed*/
   offset = 0;
   pageCount = 2;
-  currentlyShownPages: Page[] = []
+
+  currentlyRenderedPages: Page[] = []
 
   constructor(private apollo: Apollo) {
   }
@@ -27,15 +30,16 @@ export class BookComponent implements OnInit, OnDestroy {
   ngOnInit() {
 
     let book = localStorage.getItem('book')
-    let currentPages = localStorage.getItem('filterItems')
+    let currentPages = localStorage.getItem('renderedPages')
 
     if (book != null && currentPages !== null) {
-      this.currentlyShownPages = JSON.parse(currentPages!);
+      this.currentlyRenderedPages = JSON.parse(currentPages!);
       this.book = JSON.parse(book!)
       let offset = localStorage.getItem('offset')
       this.offset = Number.parseInt(offset!)
 
     } else {
+      //There is no book data in local storage... Go a head and pull one from graphql endpoint
       this.apollo
         .watchQuery({
           query: gql`
@@ -61,25 +65,35 @@ export class BookComponent implements OnInit, OnDestroy {
         });
     }
   }
-
+  /**
+   * When this component is destroyed, save the current configurations in local storage
+   * This method is called when we navigate to word-definition.
+   */
   ngOnDestroy(): void {
-    if (this.currentlyShownPages.length > 0 && this.book !== undefined) {
-      localStorage.setItem('filterItems', JSON.stringify(this.currentlyShownPages));
+    if (this.currentlyRenderedPages.length > 0 && this.book !== undefined) {
+      localStorage.setItem('renderedPages', JSON.stringify(this.currentlyRenderedPages));
       localStorage.setItem('book', JSON.stringify(this.book));
       localStorage.setItem('offset', `${this.offset}`);
     }
   }
 
   initializeView() {
-    this.currentlyShownPages = this.book!.pages.slice(this.offset, this.pageCount)
-  }
-  goToNextDoublePage() {
-    this.offset = this.offset + this.pageCount;
-    this.currentlyShownPages = this.book!.pages.slice(this.offset, (this.offset + this.pageCount));
+    this.currentlyRenderedPages = this.book!.pages.slice(this.offset, this.pageCount)
   }
 
+  /**
+   * Go to next double-page 
+   */
+  goToNextDoublePage() {
+    this.offset = this.offset + this.pageCount;
+    this.currentlyRenderedPages = this.book!.pages.slice(this.offset, (this.offset + this.pageCount));
+  }
+
+  /**
+   * Go to rrevious double-page
+   */
   goToPreviousDoublePage() {
-    this.currentlyShownPages = this.book!.pages.slice((this.offset - this.pageCount), this.offset);
+    this.currentlyRenderedPages = this.book!.pages.slice((this.offset - this.pageCount), this.offset);
     this.offset = this.offset - this.pageCount;
   }
 

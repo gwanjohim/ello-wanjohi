@@ -16,13 +16,15 @@
         <div class="book-pages-count">pages: {{book.pages.length}}
         </div>
         <div class="navigation-buttons">
-            <button [disabled]="offset === 0" class="circle-link" (click)="goToPreviousDoublePage()"><i
-                    class="material-icons">arrow_back</i></button>
-            <button [disabled]="offset === book?.pages?.length" class="circle-link" (click)="goToNextDoublePage()"><i
-                    class="material-icons">arrow_forward</i></button>
+            <button [disabled]="offset === 0" class="circle-link" (click)="goToPreviousDoublePage()">
+                <i class="material-icons">arrow_back</i>
+            </button>
+            <button [disabled]="offset === book?.pages?.length" class="circle-link" (click)="goToNextDoublePage()">
+                <i class="material-icons">arrow_forward</i>
+            </button>
         </div>
         <div class="pages-grid">
-            <div *ngFor="let pageItem of currentlyShownPages;" class="page-grid-item">
+            <div *ngFor="let pageItem of currentlyRenderedPages;" class="page-grid-item">
                 <div *ngIf="pageItem">
                     <app-book-page [BookPage]="pageItem">
                     </app-book-page>
@@ -31,3 +33,4 @@
         </div>
     </div>
 </div>
+

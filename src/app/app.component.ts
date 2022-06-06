@@ -1,7 +1,4 @@
-import { AfterContentChecked, AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { Apollo, gql } from 'apollo-angular';
-import { Book, Page, Token } from './book-model';
-import { PageSubstring } from './page-sub-string';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
