@@ -3,10 +3,6 @@
     <hr>
     <div *ngIf="BookPage.content != ''; else noItems">
         <p class="page-content" #pageContent></p>
-        <span *ngFor="let token of BookPage.tokens">
-            <span> {{token.value}} </span>
-
-        </span>
     </div>
 
     <div>
