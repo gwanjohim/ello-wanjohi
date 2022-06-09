@@ -102,7 +102,7 @@ b. app.routing module contains the following routes
 
   ## IMPLEMENTATION
 
-For a book, we are to show a double page. Image an array of pages
+For a book, we are to show a double page. Imagine an array of pages
 
 ```ts
 let pages = [0,1,2,3,4,5...]
